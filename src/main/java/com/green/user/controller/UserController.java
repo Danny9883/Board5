@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -104,12 +105,13 @@ public class UserController {
 	// userid=SEA&oldpwd=1234&passwd=12345&username=%EB%B0%94%EB%8B%A4&email=sea%40green.com
 	// Controller 에서 Map 으로 인자를 받을땐 반드시 @RequestParam 을 사용해야함 
 	@RequestMapping("/Update")
-	public  ModelAndView  update( @RequestParam Map<String, Object> map ) {
+	public  ModelAndView  update( @RequestParam Map<String, Object> map) {
 		System.out.println("map : " + map);
 		// map : {userid=AAA, oldpwd=1234, passwd=1234, username=AAA, email=AAA@green.com}
 		userMapper.updateUser2(map);
 		ModelAndView  mv  = new ModelAndView();
 		mv.setViewName("redirect:/Users/List");
+		
 		return  mv;
 	}
 	
@@ -188,14 +190,20 @@ public class UserController {
 	// 로그인    /Users/LoginForm , userid, passwd
 	@RequestMapping("/Login")
 	public  String  login( UserDto userDto, 
-			HttpServletRequest request ) {
+			HttpServletRequest request, Model model ) {
+		
+		model.addAttribute("checkmsg", "아이디 혹은 비밀번호가 일치하지 않습니다.");
 		
 		UserDto      user     = userMapper.getUser(userDto);
 
 		HttpSession  session  =  request.getSession();
 		session.setAttribute("login", user);
-		
-		return  "redirect:/Board/List?menu_id=MENU01";
+		if( user == null)
+			return  "/users/login";
+		if( user.getPasswd().equals(userDto.getPasswd()) )
+			return  "redirect:/";
+
+		return  "/users/login";
 	}
 	
 	// 로그아웃  /Users/Logout

@@ -23,6 +23,7 @@
 		    <label for="passwd" class="form-label">비밀번호</label>
 		    <input type="password" class="form-control" name="passwd" id="passwd" required />
 		  </div>
+		  <div>${ checkmsg }</div><br>
 		  <button type="submit" class="btn btn-primary" >로그인</button>
 		</form>
 	</main>
