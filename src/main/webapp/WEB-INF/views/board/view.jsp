@@ -128,8 +128,10 @@
 			<tr>
 				<td colspan="4">
 					<a href="/Board/WriteForm?menu_id=${board.menu_id}" class="btn btn-outline-primary">새 글 쓰기</a>
+					<c:if test="${ sessionScope.login.userid eq board.writer or sessionScope.login.userid eq 'ADMIN' }">
 					<a href="/Board/UpdateForm?idx=${board.idx}&menu_id=${board.menu_id}" class="btn btn-warning" >수정</a>
 					<a href="/Board/Delete?idx=${board.idx}&menu_id=${board.menu_id}" class="btn btn-danger">삭제</a>
+					</c:if>
 					<a href="/Board/List?menu_id=${board.menu_id}" class="btn btn-info">글 목록</a>
 					<a href="/" class="btn btn-success">Home</a>
 				</td>

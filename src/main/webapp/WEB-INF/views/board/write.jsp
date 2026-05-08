@@ -70,16 +70,13 @@
 		<h2 class="h2">${ menu_name } 새 글 쓰기</h2>
 		<form action="/Board/Write" method="post">
 		<input type="hidden" name="menu_id" value="${menu_id}" />
+		<input type="hidden"  name="writer" value="${ sessionScope.login.userid }" />
 			<table id="table1">
 				<tr>
 					<td><span class="red">*</span>제목</td>
 					<td>
 						<input type="text"   name="title" required="required" />
 					</td>
-				</tr>
-				<tr>
-					<td><span class="red">*</span>작성자</td>
-					<td><input type="text"  name="writer" /></td>
 				</tr>
 				<tr>
 					<td>내용</td>

@@ -27,7 +27,8 @@ public class HomeController {
 	@RequestMapping("/test")
 	@ResponseBody              // 서버가 data(html) 을 내려보낸다
 	public  String  test() {
-		return  "<h2>Test 입니다</h2>";
+		return  "<h2>Test 입니다</h2><br>"
+				+ "<a href=\"/\">돌아가기</a>";
 	}
 	
 	

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.green.user.dto.UserDto;
 import com.green.user.mapper.UserMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -177,6 +178,33 @@ public class UserController {
 	}
 	
 	
+	//----------------------------------------------------------
+	// 로그인 폼  /Users/LoginForm
+	@RequestMapping("/LoginForm")
+	public  String  loginForm() {
+		return  "users/login";
+	}
+	
+	// 로그인    /Users/LoginForm , userid, passwd
+	@RequestMapping("/Login")
+	public  String  login( UserDto userDto, 
+			HttpServletRequest request ) {
+		
+		UserDto      user     = userMapper.getUser(userDto);
+
+		HttpSession  session  =  request.getSession();
+		session.setAttribute("login", user);
+		
+		return  "redirect:/Board/List?menu_id=MENU01";
+	}
+	
+	// 로그아웃  /Users/Logout
+	@RequestMapping("/Logout")
+	public  String  logout( HttpServletRequest request ) {
+		HttpSession  session  = request.getSession();
+		session.invalidate();
+		return  "redirect:/";
+	}
 	
 	
 	
