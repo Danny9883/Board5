@@ -101,6 +101,22 @@ public class UserController {
 		return  mv;
 	}
 	
+	@RequestMapping("/UpdateForm2")
+	public  ModelAndView  updateForm2( UserDto userDto ) {
+		// 넘어온 userDto 정보
+		System.out.println("넘어온 정보 -> " + userDto);
+		
+		// 수정을 위해 DB 에서 조회한 정보
+		UserDto  user = userMapper.getUser( userDto ); 
+		System.out.println("조회된 정보 -> " + user);
+		
+		ModelAndView  mv  = new ModelAndView();
+		mv.setViewName("users/update2");
+		mv.addObject("user", user);
+		
+		return  mv;
+	}
+	
 	// /Users/Update
 	// userid=SEA&oldpwd=1234&passwd=12345&username=%EB%B0%94%EB%8B%A4&email=sea%40green.com
 	// Controller 에서 Map 으로 인자를 받을땐 반드시 @RequestParam 을 사용해야함 
@@ -111,6 +127,17 @@ public class UserController {
 		userMapper.updateUser2(map);
 		ModelAndView  mv  = new ModelAndView();
 		mv.setViewName("redirect:/Users/List");
+		
+		return  mv;
+	}
+	
+	@RequestMapping("/Update2")
+	public  ModelAndView  update2( @RequestParam Map<String, Object> map) {
+		System.out.println("map : " + map);
+		// map : {userid=AAA, oldpwd=1234, passwd=1234, username=AAA, email=AAA@green.com}
+		userMapper.updateUser2(map);
+		ModelAndView  mv  = new ModelAndView();
+		mv.setViewName("redirect:/");
 		
 		return  mv;
 	}

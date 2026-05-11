@@ -24,7 +24,7 @@
 		<div>&nbsp;</div>    
 		
 		<c:if test="${ sessionScope.login.userid != 'ADMIN' and sessionScope.login.userid != null}">
-		<div><a href="/Users/UpdateForm?userid=${ sessionScope.login.userid }">개인정보 수정</a></div>
+		<div><a href="/Users/UpdateForm2?userid=${ sessionScope.login.userid }">개인정보 수정</a></div>
 		</c:if>
 		<c:if test="${ sessionScope.login.userid eq 'ADMIN' }">
     <div><a href="/Users/List">사용자 목록</a></div>  
